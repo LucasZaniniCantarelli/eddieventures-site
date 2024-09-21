@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios de Anúncios</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <style>
+        .relatorio-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .relatorio-box h3 {
+            margin-bottom: 15px;
+        }
+
+        .stats-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .stats-list li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header') %> <!-- Inclui o header -->
+
+    <div class="container mt-5">
+        <h1 class="text-center">Relatórios de Anúncios</h1>
+        <% if (anuncios.length === 0) { %>
+            <p class="text-center">Você não possui anúncios para gerar relatórios.</p>
+        <% } else { %>
+            <% anuncios.forEach(anuncio => { %>
+                <div class="relatorio-box">
+                    <h3>Anúncio ID: <%= anuncio.id %></h3>
+                    <img src="/uploads/<%= anuncio.imagem_url %>" alt="Imagem do anúncio" width="150" class="mb-3">
+                    <ul class="stats-list">
+                        <li><strong>Quantidade comprada:</strong> <%= anuncio.quantidade %></li>
+                        <li><strong>Valor total:</strong> R$ <%= anuncio.valor %></li>
+                        <li><strong>Visualizações no jogo:</strong> <%= anuncio.visualizacoes || 0 %> (placeholder)</li>
+                        <li><strong>Interações no jogo:</strong> <%= anuncio.interacoes || 0 %> (placeholder)</li>
+                        <li><strong>Estimativa de alcance:</strong> <%= anuncio.alcance || 'Em breve' %> (placeholder)</li>
+                    </ul>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</body>
+</html>

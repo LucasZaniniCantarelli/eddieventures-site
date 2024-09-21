@@ -129,6 +129,26 @@ app.get('/anuncios', (req, res) => {
     });
 });
 
+// Rota para visualizar relatórios de anúncios da empresa logada
+app.get('/relatorios', (req, res) => {
+    const empresa_id = req.session.user.empresa_id;
+
+    if (!empresa_id) {
+        return res.status(403).send('Acesso negado. Usuário não autenticado.');
+    }
+
+    const query = 'SELECT * FROM anuncios WHERE empresa_id = ?';
+    db.query(query, [empresa_id], (err, results) => {
+        if (err) {
+            console.error('Erro ao buscar anúncios para relatórios:', err);
+            return res.status(500).send('Erro ao buscar relatórios.');
+        }
+
+        // Envia os anúncios para a view relatorios.ejs
+        res.render('relatorios', { anuncios: results });
+    });
+});
+
 // Rota GET para exibir o formulário de registro de empresas
 app.get('/register', (req, res) => {
     res.render('register');
