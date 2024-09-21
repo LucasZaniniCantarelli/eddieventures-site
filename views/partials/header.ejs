@@ -18,7 +18,7 @@
                     <span style="color: white;">Logado como: <%= user.email %> (<%= user.role === 'admin' ? 'Administrador' : 'Empresa' %>)</span>
                 </li>
                 <li style="display: inline; margin-right: 20px;">
-                    <a href="<%= user.role === 'admin' ? '/admin-dashboard' : '/empresa-dashboard' %>" style="color: white; text-decoration: none; padding: 10px 20px; background-color: #555; border-radius: 5px;">
+                    <a href="<%= user.role === 'admin' ? '/admin/dashboard' : '/empresa/dashboard' %>" style="color: white; text-decoration: none; padding: 10px 20px; background-color: #555; border-radius: 5px;">
                         Dashboard
                     </a>
                 </li>
@@ -26,6 +26,7 @@
                     <a href="/logout" style="color: white; text-decoration: none; padding: 10px 20px; background-color: #555; border-radius: 5px;">Logout</a>
                 </li>
             <% } %>
+            
         </ul>
 
         <!-- Div para a logo no canto direito -->

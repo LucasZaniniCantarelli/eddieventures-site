@@ -10,9 +10,7 @@
     <%- include('partials/header') %>  <!-- Header com navegação -->
     <div class="container mt-5">
         <h1>Compra de Anúncio</h1>
-        <form action="/purchase" method="POST" enctype="multipart/form-data">
-            <!-- Campo de ID da Empresa (hidden) -->
-            <input type="hidden" id="empresa_id" name="empresa_id" value="<%= user.empresa_id %>">
+        <form action="/empresa/purchase" method="POST" enctype="multipart/form-data">
 
             <!-- Campo de Logotipo -->
             <div class="form-group">
