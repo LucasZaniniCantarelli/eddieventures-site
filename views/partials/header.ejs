@@ -1,0 +1,38 @@
+<header style="background-color: #333; padding: 10px;">
+    <nav style="display: flex; justify-content: space-between; align-items: center;">
+        <ul style="list-style-type: none; margin: 0; padding: 0;">
+            <li style="display: inline; margin-right: 20px;">
+                <a href="/" style="color: white; text-decoration: none; padding: 10px 20px; background-color: #555; border-radius: 5px;">Página Principal</a>
+            </li>
+            <% if (!user) { %>
+                <!-- Mostrar Login e Registro se o usuário não estiver autenticado -->
+                <li style="display: inline; margin-right: 20px;">
+                    <a href="/login" style="color: white; text-decoration: none; padding: 10px 20px; background-color: #555; border-radius: 5px;">Login</a>
+                </li>
+                <li style="display: inline; margin-right: 20px;">
+                    <a href="/register" style="color: white; text-decoration: none; padding: 10px 20px; background-color: #555; border-radius: 5px;">Registrar</a>
+                </li>
+            <% } else { %>
+                <!-- Mostrar informações do usuário logado -->
+                <li style="display: inline; margin-right: 20px;">
+                    <span style="color: white;">Logado como: <%= user.email %> (<%= user.role === 'admin' ? 'Administrador' : 'Empresa' %>)</span>
+                </li>
+                <li style="display: inline; margin-right: 20px;">
+                    <a href="<%= user.role === 'admin' ? '/admin-dashboard' : '/empresa-dashboard' %>" style="color: white; text-decoration: none; padding: 10px 20px; background-color: #555; border-radius: 5px;">
+                        Dashboard
+                    </a>
+                </li>
+                <li style="display: inline; margin-right: 20px;">
+                    <a href="/logout" style="color: white; text-decoration: none; padding: 10px 20px; background-color: #555; border-radius: 5px;">Logout</a>
+                </li>
+            <% } %>
+        </ul>
+
+        <!-- Div para a logo no canto direito -->
+        <div>
+            <a href="/">
+                <img src="/images/logo.png" alt="Eddie Ventures Logo" style="height: 40px;">
+            </a>
+        </div>
+    </nav>
+</header>

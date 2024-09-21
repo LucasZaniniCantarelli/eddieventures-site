@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Instituições de Caridade</title>
+</head>
+<body>
+    <%- include('partials/header') %>  <!-- Inclui o header -->
+    <div class="container mt-5">
+        <h1>Lista de Instituições de Caridade</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Agência</th>
+                    <th>Conta Corrente</th>
+                    <th>Banco</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% charities.forEach(charity => { %>
+                    <tr>
+                        <td><%= charity.id %></td>
+                        <td><%= charity.name %></td>
+                        <td><%= charity.email %></td>
+                        <td><%= charity.agencia %></td>
+                        <td><%= charity.contaCorrente %></td>
+                        <td><%= charity.banco %></td>
+                        <td>
+                            <form action="/charities/<%= charity.id %>/delete" method="POST" onsubmit="return confirm('Você tem certeza que deseja deletar esta instituição?');">
+                                <button type="submit">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

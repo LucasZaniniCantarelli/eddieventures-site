@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Instituição de Caridade</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <%- include('partials/header') %>  <!-- Inclui o header -->
+    <div class="container mt-5">
+        <h1>Cadastro de Instituição de Caridade</h1>
+        <form action="/charities" method="POST">
+            <!-- Campo de Nome da Instituição -->
+            <div class="form-group">
+                <label for="name">Nome da Instituição</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+
+            <!-- Campo de Descrição -->
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <textarea class="form-control" id="description" name="description"></textarea>
+            </div>
+
+            <!-- Campo de Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <!-- Campo de Agência -->
+            <div class="form-group">
+                <label for="agencia">Agência</label>
+                <input type="text" class="form-control" id="agencia" name="agencia" required>
+            </div>
+
+            <!-- Campo de Conta Corrente -->
+            <div class="form-group">
+                <label for="contaCorrente">Conta Corrente</label>
+                <input type="text" class="form-control" id="contaCorrente" name="contaCorrente" required>
+            </div>
+
+            <!-- Campo de Banco -->
+            <div class="form-group">
+                <label for="banco">Banco</label>
+                <input type="text" class="form-control" id="banco" name="banco" required>
+            </div>
+
+            <!-- Botão de Confirmação -->
+            <button type="submit" class="btn btn-primary">Confirmar Cadastro</button>
+        </form>
+    </div>
+</body>
+</html>

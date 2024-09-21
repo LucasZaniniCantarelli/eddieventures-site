@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra de Anúncio</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <%- include('partials/header') %>  <!-- Header com navegação -->
+    <div class="container mt-5">
+        <h1>Compra de Anúncio</h1>
+        <form action="/purchase" method="POST" enctype="multipart/form-data">
+            <!-- Campo de ID da Empresa (hidden) -->
+            <input type="hidden" id="empresa_id" name="empresa_id" value="<%= user.empresa_id %>">
+
+            <!-- Campo de Logotipo -->
+            <div class="form-group">
+                <label for="imagem">Logotipo do Anúncio</label>
+                <input type="file" class="form-control" id="imagem" name="imagem" required>
+            </div>
+
+            <!-- Campo de Quantidade de Anúncios -->
+            <div class="form-group">
+                <label for="quantidade">Quantidade de Anúncios</label>
+                <input type="number" class="form-control" id="quantidade" name="quantidade" required>
+            </div>
+
+            <!-- Botões de Presets para definir a quantidade de anúncios -->
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" onclick="setQuantidade(100)">100 Anúncios</button>
+                <button type="button" class="btn btn-secondary" onclick="setQuantidade(1000)">1000 Anúncios</button>
+                <button type="button" class="btn btn-secondary" onclick="setQuantidade(10000)">10000 Anúncios</button>
+            </div>
+
+            <!-- Campo de Valor Total (calculado automaticamente) -->
+            <div class="form-group">
+                <label for="valor">Valor Total (R$)</label>
+                <input type="number" class="form-control" id="valor" name="valor" step="0.01" readonly>
+            </div>
+
+            <h3>Dados do Cartão de Crédito</h3>
+
+            <!-- Campo de Número do Cartão -->
+            <div class="form-group">
+                <label for="cartao">Número do Cartão</label>
+                <input type="text" class="form-control" id="cartao" name="cartao" required>
+            </div>
+
+            <!-- Campo de Data de Validade -->
+            <div class="form-group">
+                <label for="validade">Data de Validade (MM/AA)</label>
+                <input type="text" class="form-control" id="validade" name="validade" required>
+            </div>
+
+            <!-- Campo de CVV -->
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" class="form-control" id="cvv" name="cvv" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Finalizar Compra</button>
+        </form>
+    </div>
+
+    <!-- Script externo -->
+    <script src="/js/purchase.js"></script>
+
+    <!-- Script inline para presets -->
+    <script>
+        function setQuantidade(valor) {
+            document.getElementById('quantidade').value = valor;
+            const event = new Event('input');
+            document.getElementById('quantidade').dispatchEvent(event); // Dispara o evento 'input' para recalcular o valor
+        }
+    </script>
+</body>
+</html>
