@@ -110,6 +110,25 @@ app.get('/empresa-dashboard', authMiddleware('empresa'), (req, res) => {
     res.render('empresa_dashboard', { empresa_id: req.session.user.empresa_id });
 });
 
+// Rota para visualizar os anúncios comprados pela empresa logada
+app.get('/anuncios', (req, res) => {
+    const empresa_id = req.session.user.empresa_id;
+
+    if (!empresa_id) {
+        return res.status(403).send('Acesso negado. Usuário não autenticado.');
+    }
+
+    const query = 'SELECT * FROM anuncios WHERE empresa_id = ?';
+    db.query(query, [empresa_id], (err, results) => {
+        if (err) {
+            console.error('Erro ao buscar anúncios:', err);
+            return res.status(500).send('Erro ao buscar anúncios.');
+        }
+
+        res.render('anuncios_list', { anuncios: results });
+    });
+});
+
 // Rota GET para exibir o formulário de registro de empresas
 app.get('/register', (req, res) => {
     res.render('register');
@@ -247,7 +266,17 @@ app.post('/purchase', upload.single('imagem'), (req, res) => {
             return res.status(500).send('Erro ao registrar compra.');
         }
 
-        res.send('Compra realizada com sucesso! Anúncio armazenado.');
+    // Envia uma mensagem e redireciona após um delay de 3 segundos
+    res.send(`
+        <h1>Compra realizada com sucesso! Anúncio armazenado.</h1>
+        <p>Você será redirecionado em breve...</p>
+        <script>
+            setTimeout(function() {
+                window.location.href = '/purchase-form';
+            }, 3000);  // Redireciona após 3 segundos
+        </script>
+    `);
+
     });
 });
 

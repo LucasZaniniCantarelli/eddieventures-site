@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Anúncios</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            border-radius: 8px;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header') %> <!-- Inclui o header -->
+
+    <div class="container mt-5">
+        <h1 class="text-center">Seus Anúncios Comprados</h1>
+        <% if (anuncios.length === 0) { %>
+            <p class="text-center">Você ainda não comprou nenhum anúncio.</p>
+        <% } else { %>
+            <table class="table table-bordered table-hover mt-3">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Imagem</th>
+                        <th>Quantidade</th>
+                        <th>Valor Total (R$)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% anuncios.forEach(anuncio => { %>
+                        <tr>
+                            <td><%= anuncio.id %></td>
+                            <td><img src="/uploads/<%= anuncio.imagem_url %>" alt="Imagem do anúncio" width="100"></td>
+                            <td><%= anuncio.quantidade %></td>
+                            <td>R$ <%= anuncio.valor %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+</body>
+</html>
