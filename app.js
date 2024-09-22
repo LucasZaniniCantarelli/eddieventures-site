@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes/api');
 const path = require('path');
 const app = express();
 const port = 3000;
@@ -37,10 +38,11 @@ app.use('/uploads', express.static('uploads'));
 app.use(express.static('public'));
 
 // Incluir as rotas
+app.use('/', authRoutes);
 app.use('/', indexRoutes);
 app.use('/empresa', empresaRoutes);
 app.use('/admin', adminRoutes);
-app.use('/', authRoutes);
+app.use('/api', apiRoutes);
 
 
 // Iniciar o servidor
