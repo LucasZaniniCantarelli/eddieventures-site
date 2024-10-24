@@ -5,7 +5,7 @@ const db = require('../db'); // Certifique-se de que o db.js esteja configurado 
 // Middleware para verificar a chave de API
 router.use((req, res, next) => {
     const apiKey = req.headers['x-api-key']; // Cabeçalho da chave de API
-    const validApiKey = '123456'; // Substitua pela sua chave de API real
+    const validApiKey = '123456';
 
     if (apiKey === validApiKey) {
         next();
@@ -21,7 +21,16 @@ router.get('/ads', (req, res) => {
         if (err) {
             return res.status(500).json({ error: 'Erro ao buscar anúncios.' });
         }
-        res.json(results); // Retorna os anúncios em formato JSON
+        
+        // Atualizar o caminho da imagem para incluir o host e o diretório correto
+        const ads = results.map(ad => {
+            return {
+                ...ad,
+                imagem_url: `http://localhost:3000/uploads/${ad.imagem_url}`
+            };
+        });
+
+        res.json(ads); // Retorna os anúncios com URLs completas
     });
 });
 
